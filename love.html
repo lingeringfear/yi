@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title> 致最特别的你 · 表白心意 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* 避免移动端长按菜单，提升精致感 */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ff9a9e 0%, #fad0c4 40%, #fad0c4 70%, #ffdde1 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 浪漫漂浮小爱心背景 */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-heart {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.5;
+            animation: floatUp 10s linear infinite;
+            color: #ff3366;
+            text-shadow: 0 0 3px rgba(255, 80, 120, 0.6);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* 主卡片 */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 480px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(2px);
+            border-radius: 64px 48px 64px 48px;
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.96) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* 顶部浪漫区域 */
+        .hero {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            padding: 32px 24px 40px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            background: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff5f7;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 28px;
+        }
+
+        .avatar-icon {
+            font-size: 68px;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2));
+            margin-bottom: 8px;
+            display: inline-block;
+            animation: gentleBounce 2s infinite ease;
+        }
+
+        @keyframes gentleBounce {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-6px); }
+        }
+
+        h1 {
+            font-size: 2.1rem;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            margin: 12px 0 8px;
+            font-weight: 700;
+        }
+
+        .sub {
+            font-size: 1rem;
+            color: #fff9e8;
+            background: rgba(0,0,0,0.15);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+        }
+
+        /* 表单内容区 */
+        .form-content {
+            padding: 36px 28px 40px;
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-align: center;
+            color: #c63b5e;
+            margin-bottom: 28px;
+            background: #fff0f3;
+            padding: 16px 12px;
+            border-radius: 60px;
+            box-shadow: 0 5px 12px rgba(199, 68, 98, 0.1);
+            letter-spacing: -0.3px;
+        }
+
+        .question-text span {
+            display: inline-block;
+            animation: wave 1.2s infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg);}
+            25% { transform: rotate(12deg);}
+            75% { transform: rotate(-6deg);}
+            100% { transform: rotate(0deg);}
+        }
+
+        /* 按钮选项 优雅大气 */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .love-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: white;
+            border: 2px solid #ffb7c5;
+            border-radius: 100px;
+            padding: 18px 12px;
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: #b33b5c;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            background: #fffef7;
+        }
+
+        .love-btn .emoji-big {
+            font-size: 2rem;
+        }
+
+        .love-btn:active {
+            transform: scale(0.97);
+            background: #ffeef2;
+            border-color: #ff809e;
+        }
+
+        /* 特别按钮的回应区域 */
+        .response-message {
+            text-align: center;
+            margin-top: 24px;
+            background: #ffeef4;
+            padding: 18px 16px;
+            border-radius: 48px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #bd4062;
+            transition: all 0.3s;
+            border: 1px solid #ffc0d0;
+            backdrop-filter: blur(4px);
+            line-height: 1.4;
+        }
+
+        .response-message i {
+            font-style: normal;
+            display: inline-block;
+            animation: littleLove 0.6s ease infinite alternate;
+        }
+
+        @keyframes littleLove {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); text-shadow: 0 0 4px #ff4d6d; }
+        }
+
+        /* 浪漫小签名 */
+        .signature {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: #e29bb0;
+            border-top: 1px dashed #ffcdda;
+            padding-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* 弹窗自定义 (手机友好) */
+        .modal-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .modal-mask.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: #fffafc;
+            width: 85%;
+            max-width: 340px;
+            border-radius: 56px;
+            padding: 28px 20px 32px;
+            text-align: center;
+            box-shadow: 0 30px 35px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+            border: 1px solid rgba(255, 140, 170, 0.5);
+        }
+
+        .modal-mask.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-emoji {
+            font-size: 58px;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d44c6f;
+            margin-bottom: 12px;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            color: #9e4562;
+            margin-bottom: 28px;
+            line-height: 1.4;
+        }
+
+        .modal-close {
+            background: linear-gradient(120deg, #ff8aa7, #ff5f89);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            width: 70%;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 12px rgba(255, 70, 110, 0.3);
+        }
+
+        .modal-close:active {
+            transform: scale(0.96);
+            background: #ff4a74;
+        }
+
+        /* 烟花画布 */
+        .firework-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="floating-hearts" id="floatingHearts"></div>
+<canvas id="fireworkCanvas" class="firework-canvas"></canvas>
+
+<div class="card">
+    <div class="hero">
+        <div class="avatar-icon"></div>
+        <h1>To My Love</h1>
+        <div class="sub"> 心跳的旋律只为你 </div>
+    </div>
+    <div class="form-content">
+        <div class="question-text">
+            <span></span> 你愿意和我在一起吗？ <span></span>
+        </div>
+        <div class="options">
+            <div class="love-btn" id="yesBtn">
+                <span class="emoji-big"></span> 当然愿意！ 
+            </div>
+            <div class="love-btn" id="noBtn">
+                <span class="emoji-big"></span> 让我想想... 
+            </div>
+        </div>
+        <div class="response-message" id="responseMsg">
+            点击你的心意，接收满满甜蜜 
+        </div>
+        <div class="signature">
+             你是藏在微风里的欢喜 
+        </div>
+    </div>
+</div>
+
+<!-- 自定义精美弹窗 -->
+<div id="loveModal" class="modal-mask">
+    <div class="modal-container">
+        <div class="modal-emoji"></div>
+        <div class="modal-title">Yes！</div>
+        <div class="modal-text" id="modalMessage">遇见你，是我最美的意外。<br>余生，请多指教～</div>
+        <button class="modal-close" id="closeModal">紧紧抱住 </button>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- 浪漫浮动爱心 ----------
+        const heartsContainer = document.getElementById('floatingHearts');
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('float-heart');
+            const heartSymbols = ['❤️', '💖', '💗', '💓', '💘', '💝', '🌸', '🌹'];
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            const size = Math.random() * 20 + 14; // 14px - 34px
+            heart.style.fontSize = size + 'px';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = Math.random() * 8 + 7 + 's'; // 7~15s
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            heartsContainer.appendChild(heart);
+            setTimeout(() => {
+                if(heart && heart.remove) heart.remove();
+            }, 15000);
+        }
+        setInterval(createFloatingHeart, 900);
+        for(let i=0;i<12;i++) setTimeout(createFloatingHeart, i*300);
+
+        // ---------- 音效模拟？可选无声音，但为了视觉冲击 —— 烟花效果 ----------
+        const canvas = document.getElementById('fireworkCanvas');
+        let ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId = null;
+        let fireworkActive = false;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y, vx, vy, color, size, alpha) {
+                this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                this.color = color; this.size = size; this.alpha = alpha;
+                this.gravity = 0.2;
+                this.decay = 0.98;
+                this.fade = 0.02;
+            }
+            update() {
+                this.vx *= this.decay;
+                this.vy *= this.decay;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.fade;
+                return this.alpha > 0;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createFirework(x, y) {
+            if(animationId) cancelAnimationFrame(animationId);
+            particles = [];
+            const colors = ['#FF3366', '#FF69B4', '#FF8C9E', '#FFB6C1', '#FFD966', '#FF9A76', '#E86A92'];
+            const particleCount = 70;
+            for(let i=0;i<particleCount;i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 2;
+                const vx = Math.cos(angle) * speed * (Math.random() * 1.2);
+                const vy = Math.sin(angle) * speed * (Math.random() * 1.2);
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 5 + 2;
+                particles.push(new Particle(x, y, vx, vy, color, size, 1.0));
+            }
+            function animateFirework() {
+                if(!canvas) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let anyAlive = false;
+                for(let i=0;i<particles.length;i++) {
+                    const alive = particles[i].update();
+                    if(alive) {
+                        anyAlive = true;
+                        particles[i].draw();
+                    }
+                }
+                if(anyAlive) {
+                    animationId = requestAnimationFrame(animateFirework);
+                } else {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    fireworkActive = false;
+                }
+            }
+            if(animationId) cancelAnimationFrame(animationId);
+            animateFirework();
+        }
+
+        // 触发烟花 (点击屏幕中心或者按钮周围)
+        function burstFireworkFromTouch(touchX, touchY) {
+            let x = touchX;
+            let y = touchY;
+            if(!x || !y) {
+                x = window.innerWidth / 2;
+                y = window.innerHeight / 2;
+            }
+            createFirework(x, y);
+        }
+
+        // ----- 表白核心交互 & 精致弹窗 -----
+        const yesButton = document.getElementById('yesBtn');
+        const noButton = document.getElementById('noBtn');
+        const responseMsgDiv = document.getElementById('responseMsg');
+        const modal = document.getElementById('loveModal');
+        const modalMessageSpan = document.getElementById('modalMessage');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        // 甜蜜文案库
+        const sweetMessages = [
+            " 我就知道，你是我今生的答案 ",
+            " 从此刻起，我的世界因你而完整 ",
+            " 往后余生，冷暖有相知，喜乐有分享 ",
+            " 你是我始料未及的欢喜，也是我往后所有的光 ",
+            " 确认过眼神，是我想共度余生的人 ",
+            " 双向奔赴的爱情才最有意义，谢谢你愿意 ",
+            " 星星是银河递给月亮的情书，你是世界赠予我的礼物 "
+        ];
+        
+        // 温柔拒绝回应 (不会真的拒绝，但巧妙转变)
+        let noCount = 0;
+        const noMessages = [
+            " 嗯？是不是点错啦，再给我一次机会好不好～ ",
+            " 小笨蛋，再考虑一下？我超甜的！ ",
+            " 你一定是手滑了，快点击“当然愿意”让我开心一下 ",
+            " 重新选择一下嘛，我的心扑通扑通只为你跳 "
+        ];
+
+        function showModal(titleText, contentHtml) {
+            const modalTitleElem = document.querySelector('#loveModal .modal-title');
+            if(modalTitleElem) modalTitleElem.innerText = titleText;
+            modalMessageSpan.innerHTML = contentHtml;
+            modal.classList.add('active');
+            // 弹窗打开时生成微小烟花在屏幕中间
+            burstFireworkFromTouch(window.innerWidth/2, window.innerHeight/2);
+            setTimeout(() => {
+                // 再在随机位置放一点小星光
+                for(let i=0;i<3;i++) {
+                    setTimeout(() => {
+                        const randX = window.innerWidth * (0.2 + Math.random()*0.6);
+                        const randY = window.innerHeight * (0.3 + Math.random()*0.5);
+                        createFirework(randX, randY);
+                    }, i*150);
+                }
+            }, 200);
+        }
+
+        function closeModalFunc() {
+            modal.classList.remove('active');
+        }
+
+        // 触发积极回应（YES）
+        function onYes() {
+            // 随机甜言蜜语
+            const randomMsg = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
+            // 更新下方回应区
+            responseMsgDiv.innerHTML = ` ${randomMsg}  <i></i>`;
+            // 全屏礼花效果（多点触发放烟花）
+            for(let i=0;i<5;i++) {
+                setTimeout(() => {
+                    const randX = Math.random() * window.innerWidth;
+                    const randY = Math.random() * window.innerHeight * 0.8 + 50;
+                    createFirework(randX, randY);
+                }, i * 120);
+            }
+            // 弹出大弹幕式精致弹窗
+            const sweetTitle = " 我爱你 ";
+            const sweetContent = ` 你是我漫长岁月里最心动的答案 <br> 从今以后，每一天都想对你说：遇见你真好 <br><span style="font-size:1.4rem;"> 做我女朋友吧！ </span>`;
+            showModal(sweetTitle, sweetContent);
+            
+            // 额外制造一些飘浮爱心雨
+            for(let i=0;i<30;i++) {
+                setTimeout(() => createFloatingHeart(), i*60);
+            }
+        }
+
+        function onNo() {
+            noCount++;
+            const msgIndex = (noCount-1) % noMessages.length;
+            responseMsgDiv.innerHTML = ` ${noMessages[msgIndex]}  <span style="font-size:1.2rem;"></span>`;
+            // 轻轻晃动“让我想想”按钮 撒点花瓣感觉
+            const noBtnDom = document.getElementById('noBtn');
+            noBtnDom.style.transform = 'scale(0.98)';
+            setTimeout(() => { if(noBtnDom) noBtnDom.style.transform = ''; }, 200);
+            // 不弹出拒绝弹窗，只是引导，更加浪漫
+            if(noCount >= 3) {
+                // 多次点击后撒娇引导 弹出可爱弹窗引导
+                const cuteModalTitle = " 再给我一次机会嘛 ";
+                const cuteMsg = "其实我知道，你内心是想选「当然愿意」的对不对？<br> 不要让真爱等太久哦 <br> 快点戳左边那个大按钮～ ";
+                showModal(cuteModalTitle, cuteMsg);
+                noCount = 0; // reset 避免一直弹
+            } else {
+                // 普通no时闪烁一点小光效
+                const smallFire = () => {
+                    const x = window.innerWidth * 0.7;
+                    const y = window.innerHeight * 0.6;
+                    createFirework(x, y);
+                };
+                setTimeout(smallFire, 100);
+            }
+        }
+
+        // 绑定按钮事件 (移动端使用touchstart 提升响应)
+        function attachButtonEvents() {
+            yesButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                onYes();
+            });
+            yesButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                onYes();
+            });
+            noButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                onNo();
+            });
+            noButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                onNo();
+            });
+            closeModalBtn.addEventListener('click', closeModalFunc);
+            closeModalBtn.addEventListener('touchstart', closeModalFunc);
+            // 点击模态背景关闭（提高用户体验）
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) closeModalFunc();
+            });
+        }
+
+        attachButtonEvents();
+
+        // 首次加载做一个温柔的欢迎光效 + 提示
+        setTimeout(() => {
+            responseMsgDiv.innerHTML = " 轻点按钮，把心意交给我吧 <br> 我会一直守护你 ";
+            // 开场小烟花欢迎
+            for(let i=0;i<2;i++) {
+                setTimeout(() => {
+                    const x = window.innerWidth/2 + (i===0? -50:50);
+                    const y = window.innerHeight - 120;
+                    createFirework(x, y);
+                }, 400 + i*200);
+            }
+        }, 500);
+        
+        // 防止canvas 在resize时重置 烟花停止残留不清除
+        window.addEventListener('resize', () => {
+            if(animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+            }
+            resizeCanvas();
+        });
+
+        // 优雅禁用双指缩放但保留缩放能力 (不会干扰)
+        document.body.addEventListener('touchmove', function(e) {
+            // 不干扰正常滚动, 只对模态内部无影响
+        }, { passive: false });
+        
+        // 模拟轻量级心跳震动(可选 为了细节) - 对按钮添加触感无实际震动api也可
+        // 让页面更加生动
+        const btns = document.querySelectorAll('.love-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.transition = '0.05s linear';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transition = '';
+            });
+        });
+    })();
+</script>
+</body>
+</html>
