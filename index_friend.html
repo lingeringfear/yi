@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变背景 - 橙变暗红</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Georgia", serif;
+            padding: 20px;
+            /* 核心渐变：由橙过渡到你指定的三种暗红 */
+            background: linear-gradient(135deg, #ff7b00, #e65100, #310b14, #570423, #4e0612);
+            background-size: 100% 100%;
+        }
+        .card {
+            max-width: 700px;
+            background: rgba(0, 0, 0, 0.35); /* 半透明黑底让文字更清晰 */
+            backdrop-filter: blur(8px);
+            padding: 50px 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        }
+        .signature {
+            color: #f5e6d3; /* 暖白色，配合暗红背景 */
+            font-size: 26px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .signature::before {
+            content: "“";
+            font-size: 48px;
+            color: #ff8c42;
+            display: block;
+            line-height: 0.8;
+        }
+        .signature::after {
+            content: "”";
+            font-size: 48px;
+            color: #ff8c42;
+            display: block;
+            text-align: right;
+            line-height: 0.8;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .signature { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="signature">
+            ♛两界为火，赤夜将熄，繁星晦暗，厄月孤存，净炼暝火，无人背弃，仆门永存♛
+        </div>
+    </div>
+</body>
+</html>

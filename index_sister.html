@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变背景 - 浅蓝变浅绿</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Georgia", serif;
+            padding: 20px;
+            /* 核心渐变：由浅蓝过渡到浅绿 */
+            background: linear-gradient(135deg, #d4f1f9, #b3e5fc, #81d4fa, #a5d6a7, #c8e6c9);
+            background-size: 100% 100%;
+        }
+        .card {
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.25); /* 半透明白色毛玻璃 */
+            backdrop-filter: blur(8px);
+            padding: 50px 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 30px 60px rgba(0, 20, 30, 0.15);
+        }
+        .signature {
+            color: #1a3a3a; /* 深青色文字，在浅色背景上清晰 */
+            font-size: 26px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-shadow: 0 1px 4px rgba(255,255,255,0.5);
+        }
+        .signature::before {
+            content: "“";
+            font-size: 48px;
+            color: #0288d1;
+            display: block;
+            line-height: 0.8;
+        }
+        .signature::after {
+            content: "”";
+            font-size: 48px;
+            color: #388e3c;
+            display: block;
+            text-align: right;
+            line-height: 0.8;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .signature { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="signature">
+            人生到处知何似，应似飞鸿踏雪泥
+        </div>
+    </div>
+</body>
+</html>
