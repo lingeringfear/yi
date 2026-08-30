@@ -3,60 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个性签名 - 向死而生</title>
+    <title>三合一动态签名</title>
     <style>
-        /* 全局重置与背景 */
+        /* 全局重置 */
         body {
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: "Georgia", "Times New Roman", serif;
             padding: 20px;
-            box-sizing: border-box;
+            /* ---- 动态效果 ①：流动渐变背景 ---- */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e, #ff6b6b, #feca57);
+            background-size: 300% 300%;
+            animation: gradientFlow 12s ease-in-out infinite;
         }
 
-        /* 磨砂玻璃卡片 */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ---- 卡片样式 ---- */
         .card {
-            max-width: 700px;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-            padding: 60px 50px;
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            max-width: 780px;
+            width: 100%;
+            background: rgba(20, 10, 30, 0.55);
+            backdrop-filter: blur(14px);
+            padding: 55px 45px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* ---- 动态效果 ②：呼吸光晕 ---- */
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+            animation: breatheGlow 4s ease-in-out infinite;
+            transition: all 0.3s;
         }
 
-        /* 核心签名样式 - 专门为四个字设计 */
+        @keyframes breatheGlow {
+            0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.1), 0 0 60px rgba(255, 107, 107, 0.05); border-color: rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 0 70px rgba(255, 215, 0, 0.5), 0 0 140px rgba(255, 107, 107, 0.25); border-color: rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.1), 0 0 60px rgba(255, 107, 107, 0.05); border-color: rgba(255,255,255,0.1); }
+        }
+
+        /* ---- 文案样式 ---- */
         .signature {
-            color: #f0eef8;
-            font-size: 58px;          /* 大字显气势 */
-            font-weight: bold;
+            font-size: 26px;
+            line-height: 2;
+            letter-spacing: 1.2px;
+            font-weight: 600;
             text-align: center;
-            letter-spacing: 16px;      /* 字间距拉大，更显庄重 */
-            line-height: 1.4;
-            text-shadow: 0 0 30px rgba(167, 139, 250, 0.3);
+            /* ---- 动态效果 ③：流光文字 ---- */
+            background: linear-gradient(90deg, #f9d423, #ff6b6b, #a29bfe, #f9d423);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 6s linear infinite;
+            text-shadow: none; /* 文字本身有流光，不再额外加阴影 */
         }
 
-        /* 如果手机屏幕小，自适应缩小 */
-        @media (max-width: 500px) {
+        @keyframes textShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
+        }
+
+        /* ---- 装饰性引号（单独处理，不参与流光，保持固定颜色） ---- */
+        .signature::before {
+            content: "“";
+            font-size: 50px;
+            font-weight: 700;
+            display: block;
+            line-height: 0.8;
+            margin-bottom: 12px;
+            -webkit-text-fill-color: #feca57;  /* 固定金色，不参与流光 */
+            background: none;                  /* 覆盖继承的渐变 */
+        }
+
+        .signature::after {
+            content: "”";
+            font-size: 50px;
+            font-weight: 700;
+            display: block;
+            text-align: right;
+            line-height: 0.8;
+            margin-top: 12px;
+            -webkit-text-fill-color: #feca57;
+            background: none;
+        }
+
+        /* ---- 手机自适应 ---- */
+        @media (max-width: 600px) {
             .signature {
-                font-size: 38px;
-                letter-spacing: 10px;
+                font-size: 20px;
+                line-height: 1.9;
             }
             .card {
-                padding: 40px 25px;
+                padding: 35px 25px;
             }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <!-- 符号「」已经直接写在文字里，完美符合你的要求 -->
         <div class="signature">
-            「如果你渴望得到某样东西，你得让它自由，如果它回到你身边，它就是属于你的，如果它不会回来，你就从未拥有过它。」
+            如果你渴望得到某样东西，你得让它自由，<br>
+            如果它回到你身边，它就是属于你的，<br>
+            如果它不会回来，你就从未拥有过它。
         </div>
     </div>
 </body>
